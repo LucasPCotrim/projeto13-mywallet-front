@@ -1,12 +1,10 @@
 import { AddPaymentPageStyle, FormStyle } from './AddPaymentPage.style';
-import logOutIcon from '../../assets/imgs/logOutIcon.svg';
 
 export default function AddIncomePage() {
   return (
     <AddPaymentPageStyle>
       <header>
         <h1>Nova saída</h1>
-        <img src={logOutIcon} alt='logOutIcon' />
       </header>
       <FormStyle>
         <input type='text' name='value' placeholder='Valor' />
