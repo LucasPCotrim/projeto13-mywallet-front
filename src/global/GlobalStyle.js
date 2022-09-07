@@ -136,6 +136,14 @@ const Global = css`
   body {
     background-color: #8c11be;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    --logo-font-family: 'Saira Stencil One', cursive;
+    --body-font-family: 'Raleway', sans-serif;
+    --button-background-color: #a328d6;
+    font-family: var(--body-font-family);
   }
 `;
 
