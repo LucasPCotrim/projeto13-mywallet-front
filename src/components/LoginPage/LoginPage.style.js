@@ -12,23 +12,29 @@ export const LoginPageStyle = styled.div`
     margin-bottom: 24px;
     display: flex;
     justify-content: center;
-    font-family: var(--logo-font-family);
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 50px;
-    color: #ffffff;
+    h1 {
+      font-family: var(--logo-font-family);
+      font-style: normal;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 50px;
+      color: #ffffff;
+    }
   }
   .sign-up-link {
-    font-family: var(--body-font-family);
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 18px;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 100px;
-    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    h3 {
+      font-family: var(--body-font-family);
+      font-style: normal;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 100px;
+      cursor: pointer;
+    }
   }
 `;
 

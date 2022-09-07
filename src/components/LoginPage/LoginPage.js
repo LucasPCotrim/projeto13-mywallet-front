@@ -14,7 +14,9 @@ export default function LoginPage() {
             <h2>Entrar</h2>
           </button>
         </FormStyle>
-        <div className='sign-up-link'>Primeira vez? Cadastre-se!</div>
+        <div className='sign-up-link'>
+          <h3>Primeira vez? Cadastre-se!</h3>
+        </div>
       </LoginPageStyle>
     </>
   );
