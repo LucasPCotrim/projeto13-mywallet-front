@@ -1,10 +1,55 @@
-function App() {
+import GlobalStyle from './global/GlobalStyle';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+export default function App() {
   return (
-    <div className='App'>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <>
+                <h1>Login Page</h1>
+              </>
+            }
+          />
+          <Route
+            path='/sign-up'
+            element={
+              <>
+                <h1>Sign-Up Page</h1>
+              </>
+            }
+          />
+          <Route
+            path='/main'
+            element={
+              <>
+                <h1>Main Page</h1>
+              </>
+            }
+          />
+          <Route
+            path='/add-income'
+            element={
+              <>
+                <h1>AddIncome Page</h1>
+              </>
+            }
+          />
+          <Route
+            path='/add-payment'
+            element={
+              <>
+                <h1>AddPayment Page</h1>
+              </>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
-
-export default App;
 
