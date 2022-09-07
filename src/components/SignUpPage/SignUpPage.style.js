@@ -57,7 +57,6 @@ export const FormStyle = styled.form`
     line-height: 23px;
     color: #000000;
     padding-left: 15px;
-    color: #666666;
     outline: none;
     &::placeholder {
       font-size: 20px;
