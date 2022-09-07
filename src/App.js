@@ -1,5 +1,6 @@
 import GlobalStyle from './global/GlobalStyle';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginPage from './components/LoginPage/LoginPage';
 
 export default function App() {
   return (
@@ -11,7 +12,7 @@ export default function App() {
             path='/'
             element={
               <>
-                <h1>Login Page</h1>
+                <LoginPage></LoginPage>
               </>
             }
           />
