@@ -1,10 +1,12 @@
 import { AddIncomePageStyle, FormStyle } from './AddIncomePage.style';
+import logOutIcon from '../../assets/imgs/logOutIcon.svg';
 
 export default function AddIncomePage() {
   return (
     <AddIncomePageStyle>
       <header>
         <h1>Nova entrada</h1>
+        <img src={logOutIcon} alt='logOutIcon' />
       </header>
       <FormStyle>
         <input type='text' name='value' placeholder='Valor' />

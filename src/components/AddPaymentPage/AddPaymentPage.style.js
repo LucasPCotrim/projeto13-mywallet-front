@@ -21,6 +21,10 @@ export const AddPaymentPageStyle = styled.div`
       line-height: 31px;
       color: #ffffff;
     }
+    img {
+      width: 24px;
+      cursor: pointer;
+    }
   }
 `;
 
