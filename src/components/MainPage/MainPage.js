@@ -50,19 +50,17 @@ export default function MainPage() {
         ) : (
           <TransactionContainerStyle>
             <ul>
-              {transactions.map((transaction) => {
+              {transactions.map((transaction, index) => {
                 return (
-                  <>
-                    <li>
-                      <TransactionStyle type={transaction.type}>
-                        <div className='transaction-info'>
-                          <span>{transaction.date}</span>
-                          {transaction.description}
-                        </div>
-                        <div className='transaction-value'>{transaction.value}</div>
-                      </TransactionStyle>
-                    </li>
-                  </>
+                  <li key={index}>
+                    <TransactionStyle type={transaction.type}>
+                      <div className='transaction-info'>
+                        <span>{transaction.date}</span>
+                        {transaction.description}
+                      </div>
+                      <div className='transaction-value'>{transaction.value}</div>
+                    </TransactionStyle>
+                  </li>
                 );
               })}
             </ul>
