@@ -75,7 +75,7 @@ export const FormStyle = styled.form`
     height: 46px;
     background-color: var(--button-background-color);
     border: none;
-    border-radius: 4.64px;
+    border-radius: 5px;
     text-align: center;
     display: flex;
     align-items: center;
