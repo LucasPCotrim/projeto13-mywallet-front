@@ -8,9 +8,18 @@ import {
 import logOutIcon from '../../assets/imgs/logOutIcon.svg';
 import plusIcon from '../../assets/imgs/plusIcon.svg';
 import minusIcon from '../../assets/imgs/minusIcon.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainPage() {
-  const transactions = [{ date: '30/11', description: 'Almoço mãe', value: '39,90' }];
+  const navigate = useNavigate();
+
+  const transactions = [
+    { date: '30/11', description: 'Almoço mãe', type: 'payment', value: '39,90' },
+    { date: '27/11', description: 'Mercado', type: 'payment', value: '542,54' },
+    { date: '26/11', description: 'Compras Churrasco', type: 'payment', value: '67,70' },
+    { date: '20/11', description: 'Empréstimo Maria', type: 'income', value: '500,00' },
+    { date: '15/11', description: 'Salário', type: 'income', value: '3000,00' },
+  ];
   // const transactions = [];
   return (
     <>
@@ -26,22 +35,21 @@ export default function MainPage() {
         ) : (
           <TransactionContainerStyle>
             <ul>
-              <li>
-                <TransactionStyle type={'payment'}>
-                  <div className='transaction-info'>
-                    <span>30/11</span>Almoço mãe
-                  </div>
-                  <div className='transaction-value'>39,90</div>
-                </TransactionStyle>
-              </li>
-              <li>
-                <TransactionStyle type={'payment'}>
-                  <div className='transaction-info'>
-                    <span>27/11</span>Mercado
-                  </div>
-                  <div className='transaction-value'>542,54</div>
-                </TransactionStyle>
-              </li>
+              {transactions.map((transaction) => {
+                return (
+                  <>
+                    <li>
+                      <TransactionStyle type={transaction.type}>
+                        <div className='transaction-info'>
+                          <span>{transaction.date}</span>
+                          {transaction.description}
+                        </div>
+                        <div className='transaction-value'>{transaction.value}</div>
+                      </TransactionStyle>
+                    </li>
+                  </>
+                );
+              })}
             </ul>
             <div className='bottom-line'>
               <h2>SALDO</h2>
@@ -51,11 +59,11 @@ export default function MainPage() {
         )}
 
         <ButtonsContainerStyle>
-          <button>
+          <button onClick={() => navigate('/add-income')}>
             <img src={plusIcon} alt='plusIcon' />
             <h2>Nova entrada</h2>
           </button>
-          <button>
+          <button onClick={() => navigate('/add-payment')}>
             <img src={minusIcon} alt='minusIcon' />
             <h2>Nova saída</h2>
           </button>

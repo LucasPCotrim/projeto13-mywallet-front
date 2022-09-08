@@ -73,7 +73,7 @@ export const FormStyle = styled.form`
   button {
     width: 100%;
     height: 46px;
-    background-color: var(--button-background-color);
+    background-color: var(--button-enabled-background-color);
     border: none;
     border-radius: 5px;
     text-align: center;
@@ -82,7 +82,7 @@ export const FormStyle = styled.form`
     justify-content: center;
     cursor: pointer;
     &:disabled {
-      background-color: var(--button-disabled-background-color);
+      background-color: var(--button-background-color);
       cursor: initial;
     }
     h2 {
