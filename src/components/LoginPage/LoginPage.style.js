@@ -32,9 +32,11 @@ export const LoginPageStyle = styled.div`
       line-height: 18px;
       color: #ffffff;
       text-align: center;
-      margin-bottom: 100px;
       cursor: pointer;
     }
+  }
+  a {
+    text-decoration: none;
   }
 `;
 

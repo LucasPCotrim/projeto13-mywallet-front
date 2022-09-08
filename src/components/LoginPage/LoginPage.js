@@ -1,4 +1,5 @@
 import { LoginPageStyle, FormStyle } from './LoginPage.style';
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
   return (
@@ -14,9 +15,11 @@ export default function LoginPage() {
             <h2>Entrar</h2>
           </button>
         </FormStyle>
-        <div className='sign-up-link'>
-          <h3>Primeira vez? Cadastre-se!</h3>
-        </div>
+        <Link to='/sign-up'>
+          <div className='sign-up-link'>
+            <h3>Primeira vez? Cadastre-se!</h3>
+          </div>
+        </Link>
       </LoginPageStyle>
     </>
   );

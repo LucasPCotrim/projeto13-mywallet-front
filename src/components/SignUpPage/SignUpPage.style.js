@@ -21,7 +21,7 @@ export const SignUpPageStyle = styled.div`
       color: #ffffff;
     }
   }
-  .sign-up-link {
+  .login-link {
     display: flex;
     justify-content: center;
     h3 {
@@ -32,9 +32,11 @@ export const SignUpPageStyle = styled.div`
       line-height: 18px;
       color: #ffffff;
       text-align: center;
-      margin-bottom: 100px;
       cursor: pointer;
     }
+  }
+  a {
+    text-decoration: none;
   }
 `;
 
