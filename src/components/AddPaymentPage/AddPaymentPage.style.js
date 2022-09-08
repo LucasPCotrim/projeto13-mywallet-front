@@ -56,12 +56,20 @@ export const FormStyle = styled.form`
     &:focus::placeholder {
       color: transparent;
     }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
   }
 
   button {
     width: 100%;
     height: 46px;
-    background-color: var(--button-background-color);
+    background-color: var(--button-enabled-background-color);
     border: none;
     border-radius: 4.64px;
     text-align: center;
@@ -69,6 +77,10 @@ export const FormStyle = styled.form`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    &:disabled {
+      background-color: var(--button-background-color);
+      cursor: initial;
+    }
     h2 {
       font-size: 20px;
       font-style: normal;
