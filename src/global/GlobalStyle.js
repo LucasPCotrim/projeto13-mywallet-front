@@ -142,7 +142,8 @@ const Global = css`
     justify-content: flex-start;
     --logo-font-family: 'Saira Stencil One', cursive;
     --body-font-family: 'Raleway', sans-serif;
-    --button-background-color: #a328d6;
+    --button-background-color: #22ac30;
+    --button-disabled-background-color: #a328d6;
     font-family: var(--body-font-family);
   }
 `;

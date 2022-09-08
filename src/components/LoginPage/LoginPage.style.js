@@ -81,6 +81,10 @@ export const FormStyle = styled.form`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    &:disabled {
+      background-color: var(--button-disabled-background-color);
+      cursor: initial;
+    }
     h2 {
       font-size: 20px;
       font-style: normal;
