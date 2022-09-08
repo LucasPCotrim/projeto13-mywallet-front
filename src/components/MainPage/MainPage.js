@@ -2,6 +2,7 @@ import {
   MainPageStyle,
   EmptyTransactionContainerStyle,
   TransactionContainerStyle,
+  BottomLineStyle,
   TransactionStyle,
   ButtonsContainerStyle,
 } from './MainPage.style';
@@ -21,6 +22,20 @@ export default function MainPage() {
     { date: '15/11', description: 'Salário', type: 'income', value: '3000,00' },
   ];
   // const transactions = [];
+
+  const getBalance = () => {
+    return transactions
+      .reduce((acc, transaction) => {
+        const valueString = transaction.value.replace(',', '.');
+        let value = parseFloat(valueString);
+        if (transaction.type === 'payment') {
+          value = -value;
+        }
+        return acc + value;
+      }, 0)
+      .toFixed(2);
+  };
+  const balance = getBalance();
   return (
     <>
       <MainPageStyle>
@@ -51,10 +66,10 @@ export default function MainPage() {
                 );
               })}
             </ul>
-            <div className='bottom-line'>
+            <BottomLineStyle balance={balance}>
               <h2>SALDO</h2>
-              <h3>2849,96</h3>
-            </div>
+              <h3>{balance}</h3>
+            </BottomLineStyle>
           </TransactionContainerStyle>
         )}
 

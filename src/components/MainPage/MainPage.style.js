@@ -77,24 +77,24 @@ export const TransactionContainerStyle = styled.div`
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+`;
 
-  .bottom-line {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--body-font-family);
-    font-style: normal;
-    font-size: 17px;
-    line-height: 20px;
-    h2 {
-      font-weight: 700;
-      color: #000000;
-    }
-    h3 {
-      font-weight: 400;
-      color: #03ac00;
-    }
+export const BottomLineStyle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--body-font-family);
+  font-style: normal;
+  font-size: 17px;
+  line-height: 20px;
+  h2 {
+    font-weight: 700;
+    color: #000000;
+  }
+  h3 {
+    font-weight: 400;
+    color: ${(props) => (props.balance >= 0 ? '#03AC00' : '#C70000')};
   }
 `;
 
