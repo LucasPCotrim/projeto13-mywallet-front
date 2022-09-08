@@ -24,7 +24,7 @@ export default function SignUpPage() {
       passwordConfirm: '',
     });
   };
-  function executeLogin(event) {
+  function executeSignUp(event) {
     event.preventDefault();
     console.log(form);
     clearForm();
@@ -43,7 +43,7 @@ export default function SignUpPage() {
         <div className='logo-container'>
           <h1>My Wallet</h1>
         </div>
-        <FormStyle onSubmit={executeLogin}>
+        <FormStyle onSubmit={executeSignUp}>
           <input
             type='text'
             name='name'
