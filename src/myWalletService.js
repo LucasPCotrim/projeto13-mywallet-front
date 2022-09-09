@@ -17,4 +17,9 @@ function loadTransactions(token) {
   return axios.get(transactionsAPI, { headers: { Authorization: `Bearer ${token}` } });
 }
 
-export { signUp, logIn, loadTransactions };
+function createTransaction(body, token) {
+  const transactionsAPI = `${BASE_URL}/transactions`;
+  return axios.post(transactionsAPI, body, { headers: { Authorization: `Bearer ${token}` } });
+}
+
+export { signUp, logIn, loadTransactions, createTransaction };
