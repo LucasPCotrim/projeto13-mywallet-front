@@ -12,7 +12,7 @@ import plusIcon from '../../assets/imgs/plusIcon.svg';
 import minusIcon from '../../assets/imgs/minusIcon.svg';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
-import { loadTransactions, logOut } from '../../myWalletService.js';
+import { loadTransactions, logOut } from '../../APIs/myWalletService.js';
 
 export default function MainPage() {
   const { user } = useContext(UserContext);

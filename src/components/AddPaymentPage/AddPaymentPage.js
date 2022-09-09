@@ -1,6 +1,6 @@
 import { AddPaymentPageStyle, FormStyle } from './AddPaymentPage.style';
 import { useState, useContext } from 'react';
-import { createTransaction } from '../../myWalletService';
+import { createTransaction } from '../../APIs/myWalletService';
 import UserContext from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 

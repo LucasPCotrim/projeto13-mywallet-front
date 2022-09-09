@@ -1,7 +1,7 @@
 import { SignUpPageStyle, FormStyle } from './SignUpPage.style';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { signUp } from '../../myWalletService.js';
+import { signUp } from '../../APIs/myWalletService.js';
 
 export default function SignUpPage() {
   const navigate = useNavigate();

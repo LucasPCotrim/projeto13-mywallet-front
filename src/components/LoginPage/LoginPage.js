@@ -1,7 +1,7 @@
 import { LoginPageStyle, FormStyle } from './LoginPage.style';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
-import { logIn } from '../../myWalletService';
+import { logIn } from '../../APIs/myWalletService';
 import UserContext from '../../contexts/UserContext';
 
 export default function LoginPage() {
