@@ -9,7 +9,7 @@ import AddPaymentPage from './components/AddPaymentPage/AddPaymentPage';
 import MainPage from './components/MainPage/MainPage';
 
 export default function App() {
-  const [user, setUser] = useState({ name: '' });
+  const [user, setUser] = useState({ name: '', email: '', token: '' });
 
   return (
     <>

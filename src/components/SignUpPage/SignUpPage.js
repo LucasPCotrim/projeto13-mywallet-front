@@ -1,15 +1,16 @@
 import { SignUpPageStyle, FormStyle } from './SignUpPage.style';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { signUp } from '../../myWalletService.js';
 
 export default function SignUpPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
     email: '',
     password: '',
     passwordConfirm: '',
   });
-
   const handleForm = (event) => {
     setForm({
       ...form,
@@ -27,6 +28,15 @@ export default function SignUpPage() {
   function executeSignUp(event) {
     event.preventDefault();
     console.log(form);
+    const promise = signUp(form);
+    promise
+      .then((res) => {
+        console.log(res.data.message);
+        navigate('/');
+      })
+      .catch((res) => {
+        alert(res.response.data.message);
+      });
     clearForm();
   }
 

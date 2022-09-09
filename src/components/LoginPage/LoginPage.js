@@ -1,8 +1,12 @@
 import { LoginPageStyle, FormStyle } from './LoginPage.style';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { logIn } from '../../myWalletService';
+import UserContext from '../../contexts/UserContext';
 
 export default function LoginPage() {
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -23,6 +27,21 @@ export default function LoginPage() {
   function executeLogin(event) {
     event.preventDefault();
     console.log(form);
+    const promise = logIn(form);
+    promise
+      .then((res) => {
+        console.log(res.data.message);
+        setUser({
+          ...user,
+          name: res.data.user.name,
+          email: res.data.user.email,
+          token: res.data.token,
+        });
+        navigate('/main');
+      })
+      .catch((res) => {
+        alert(res.response.data.message);
+      });
     clearForm();
   }
 
