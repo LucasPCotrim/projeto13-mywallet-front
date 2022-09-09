@@ -24,7 +24,7 @@ export default function LoginPage() {
       password: '',
     });
   };
-  function executeLogin(event) {
+  const executeLogin = (event) => {
     event.preventDefault();
     const promise = logIn(form);
     promise
@@ -42,7 +42,7 @@ export default function LoginPage() {
         alert(res.response.data.message);
       });
     clearForm();
-  }
+  };
 
   const disableButton = form.email === '' || form.password === '';
 

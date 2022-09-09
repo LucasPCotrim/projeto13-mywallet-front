@@ -12,7 +12,7 @@ import plusIcon from '../../assets/imgs/plusIcon.svg';
 import minusIcon from '../../assets/imgs/minusIcon.svg';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
-import { loadTransactions } from '../../myWalletService.js';
+import { loadTransactions, logOut } from '../../myWalletService.js';
 
 export default function MainPage() {
   const { user } = useContext(UserContext);
@@ -36,6 +36,18 @@ export default function MainPage() {
       });
   }, []);
 
+  const executeLogOut = () => {
+    const promise = logOut(user.token);
+    promise
+      .then((res) => {
+        console.log(res.data.message);
+        navigate('/');
+      })
+      .catch((res) => {
+        alert(res.response.data.message);
+      });
+  };
+
   const getBalance = () => {
     const balance = parseFloat(
       transactions.reduce((acc, transaction) => {
@@ -52,7 +64,7 @@ export default function MainPage() {
       <MainPageStyle>
         <header>
           <h1>{`Olá, ${user.name}`}</h1>
-          <img src={logOutIcon} alt='logOutIcon' />
+          <img src={logOutIcon} alt='logOutIcon' onClick={() => executeLogOut()} />
         </header>
         {transactions.length === 0 ? (
           <EmptyTransactionContainerStyle>

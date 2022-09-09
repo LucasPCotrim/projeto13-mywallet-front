@@ -25,7 +25,7 @@ export default function SignUpPage() {
       passwordConfirm: '',
     });
   };
-  function executeSignUp(event) {
+  const executeSignUp = (event) => {
     event.preventDefault();
     const promise = signUp(form);
     promise
@@ -37,7 +37,7 @@ export default function SignUpPage() {
         alert(res.response.data.message);
       });
     clearForm();
-  }
+  };
 
   const disableButton =
     form.name === '' ||

@@ -22,4 +22,9 @@ function createTransaction(body, token) {
   return axios.post(transactionsAPI, body, { headers: { Authorization: `Bearer ${token}` } });
 }
 
-export { signUp, logIn, loadTransactions, createTransaction };
+function logOut(token) {
+  const logOutAPI = `${BASE_URL}/logout`;
+  return axios.post(logOutAPI, {}, { headers: { Authorization: `Bearer ${token}` } });
+}
+
+export { signUp, logIn, loadTransactions, createTransaction, logOut };
