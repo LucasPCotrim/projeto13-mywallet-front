@@ -19,15 +19,6 @@ export default function MainPage() {
   const [transactions, setTransactions] = useState([]);
   const navigate = useNavigate();
 
-  // const transactions = [
-  //   { date: '30/11', description: 'Almoço mãe', type: 'payment', value: '39,90' },
-  //   { date: '27/11', description: 'Mercado', type: 'payment', value: '542,54' },
-  //   { date: '26/11', description: 'Compras Churrasco', type: 'payment', value: '67,70' },
-  //   { date: '20/11', description: 'Empréstimo Maria', type: 'income', value: '500,00' },
-  //   { date: '15/11', description: 'Salário', type: 'income', value: '3000,00' },
-  // ];
-  // const transactions = [];
-
   useEffect(() => {
     if (user.token === '') {
       navigate('/');
@@ -46,16 +37,14 @@ export default function MainPage() {
   }, []);
 
   const getBalance = () => {
-    return transactions
-      .reduce((acc, transaction) => {
-        const valueString = transaction.value.replace(',', '.');
-        let value = parseFloat(valueString);
-        if (transaction.type === 'payment') {
-          value = -value;
-        }
-        return acc + value;
+    const balance = parseFloat(
+      transactions.reduce((acc, transaction) => {
+        let value = parseFloat(transaction.value.replace(',', '.'));
+        return transaction.type === 'payment' ? acc - value : acc + value;
       }, 0)
-      .toFixed(2);
+    );
+
+    return balance.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   };
   const balance = getBalance();
   return (
@@ -80,15 +69,17 @@ export default function MainPage() {
                         <span>{transaction.date}</span>
                         {transaction.description}
                       </div>
-                      <div className='transaction-value'>{transaction.value}</div>
+                      <div className='transaction-value'>{`R$ ${parseFloat(
+                        transaction.value
+                      ).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}</div>
                     </TransactionStyle>
                   </li>
                 );
               })}
             </ul>
-            <BottomLineStyle balance={balance}>
+            <BottomLineStyle positive={balance[0] !== '-'}>
               <h2>SALDO</h2>
-              <h3>{balance}</h3>
+              <h3>{`R$ ${balance}`}</h3>
             </BottomLineStyle>
           </TransactionContainerStyle>
         )}

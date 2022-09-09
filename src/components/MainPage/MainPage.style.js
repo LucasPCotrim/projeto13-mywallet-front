@@ -94,7 +94,7 @@ export const BottomLineStyle = styled.div`
   }
   h3 {
     font-weight: 400;
-    color: ${(props) => (props.balance >= 0 ? '#03AC00' : '#C70000')};
+    color: ${(props) => (props.positive ? '#03AC00' : '#C70000')};
   }
 `;
 
