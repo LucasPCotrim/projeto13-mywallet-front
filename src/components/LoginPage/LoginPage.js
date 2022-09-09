@@ -26,7 +26,6 @@ export default function LoginPage() {
   };
   function executeLogin(event) {
     event.preventDefault();
-    console.log(form);
     const promise = logIn(form);
     promise
       .then((res) => {

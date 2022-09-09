@@ -27,7 +27,6 @@ export default function SignUpPage() {
   };
   function executeSignUp(event) {
     event.preventDefault();
-    console.log(form);
     const promise = signUp(form);
     promise
       .then((res) => {
