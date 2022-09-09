@@ -12,4 +12,9 @@ function logIn(body) {
   return axios.post(loginAPI, body);
 }
 
-export { signUp, logIn };
+function loadTransactions(token) {
+  const transactionsAPI = `${BASE_URL}/transactions`;
+  return axios.get(transactionsAPI, { headers: { Authorization: `Bearer ${token}` } });
+}
+
+export { signUp, logIn, loadTransactions };

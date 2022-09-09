@@ -6,22 +6,44 @@ import {
   TransactionStyle,
   ButtonsContainerStyle,
 } from './MainPage.style';
+import { useContext, useEffect, useState } from 'react';
 import logOutIcon from '../../assets/imgs/logOutIcon.svg';
 import plusIcon from '../../assets/imgs/plusIcon.svg';
 import minusIcon from '../../assets/imgs/minusIcon.svg';
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
+import { loadTransactions } from '../../myWalletService.js';
 
 export default function MainPage() {
+  const { user } = useContext(UserContext);
+  const [transactions, setTransactions] = useState([]);
   const navigate = useNavigate();
 
-  const transactions = [
-    { date: '30/11', description: 'Almoço mãe', type: 'payment', value: '39,90' },
-    { date: '27/11', description: 'Mercado', type: 'payment', value: '542,54' },
-    { date: '26/11', description: 'Compras Churrasco', type: 'payment', value: '67,70' },
-    { date: '20/11', description: 'Empréstimo Maria', type: 'income', value: '500,00' },
-    { date: '15/11', description: 'Salário', type: 'income', value: '3000,00' },
-  ];
+  // const transactions = [
+  //   { date: '30/11', description: 'Almoço mãe', type: 'payment', value: '39,90' },
+  //   { date: '27/11', description: 'Mercado', type: 'payment', value: '542,54' },
+  //   { date: '26/11', description: 'Compras Churrasco', type: 'payment', value: '67,70' },
+  //   { date: '20/11', description: 'Empréstimo Maria', type: 'income', value: '500,00' },
+  //   { date: '15/11', description: 'Salário', type: 'income', value: '3000,00' },
+  // ];
   // const transactions = [];
+
+  useEffect(() => {
+    if (user.token === '') {
+      navigate('/');
+      return;
+    }
+    const promise = loadTransactions(user.token);
+    promise
+      .then((res) => {
+        console.log(res.data.message);
+        console.log(res.data.transactions);
+        setTransactions([...res.data.transactions]);
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  }, []);
 
   const getBalance = () => {
     return transactions
@@ -40,7 +62,7 @@ export default function MainPage() {
     <>
       <MainPageStyle>
         <header>
-          <h1>Olá, Fulano</h1>
+          <h1>{`Olá, ${user.name}`}</h1>
           <img src={logOutIcon} alt='logOutIcon' />
         </header>
         {transactions.length === 0 ? (
