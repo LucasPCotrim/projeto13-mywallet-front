@@ -27,4 +27,9 @@ function logOut(token) {
   return axios.post(logOutAPI, {}, { headers: { Authorization: `Bearer ${token}` } });
 }
 
-export { signUp, logIn, loadTransactions, createTransaction, logOut };
+function deleteTransaction(token, transactionId) {
+  const deleteTransactionAPI = `${BASE_URL}/transactions/${transactionId}`;
+  return axios.delete(deleteTransactionAPI, { headers: { Authorization: `Bearer ${token}` } });
+}
+
+export { signUp, logIn, loadTransactions, createTransaction, logOut, deleteTransaction };

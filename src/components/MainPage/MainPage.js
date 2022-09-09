@@ -12,12 +12,60 @@ import plusIcon from '../../assets/imgs/plusIcon.svg';
 import minusIcon from '../../assets/imgs/minusIcon.svg';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
-import { loadTransactions, logOut } from '../../APIs/myWalletService.js';
+import { loadTransactions, logOut, deleteTransaction } from '../../APIs/myWalletService.js';
+
+function Transaction({ type, date, description, value, id, reloadPage, setReloadPage }) {
+  const { user } = useContext(UserContext);
+
+  const executeDeleteTransaction = (token, transactionId) => {
+    console.log(id);
+    const promise = deleteTransaction(token, transactionId);
+    promise
+      .then(() => {
+        setReloadPage(!reloadPage);
+      })
+      .catch((res) => {
+        alert(res.response?.data?.message || 'Error when connecting to the database');
+      });
+  };
+  return (
+    <>
+      <li>
+        <TransactionStyle type={type}>
+          <div className='transaction-info'>
+            <span>{date}</span>
+            {description}
+          </div>
+          <div className='transaction-value'>
+            <span>
+              {`R$ ${parseFloat(value).toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+              })}`}
+            </span>
+            <button onClick={() => executeDeleteTransaction(user.token, id)}>X</button>
+          </div>
+        </TransactionStyle>
+      </li>
+    </>
+  );
+}
+
+function BottomLine({ balance }) {
+  return (
+    <>
+      <BottomLineStyle positive={balance[0] !== '-'}>
+        <h2>SALDO</h2>
+        <h3>{`R$ ${balance}`}</h3>
+      </BottomLineStyle>
+    </>
+  );
+}
 
 export default function MainPage() {
   const { user } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
   const navigate = useNavigate();
+  const [reloadPage, setReloadPage] = useState(false);
 
   useEffect(() => {
     if (user.token === '') {
@@ -27,13 +75,12 @@ export default function MainPage() {
     const promise = loadTransactions(user.token);
     promise
       .then((res) => {
-        console.log(res.data.message);
         setTransactions([...res.data.transactions]);
       })
       .catch((res) => {
         console.log(res);
       });
-  }, []);
+  }, [reloadPage]);
 
   const executeLogOut = () => {
     const promise = logOut(user.token);
@@ -43,7 +90,7 @@ export default function MainPage() {
         navigate('/');
       })
       .catch((res) => {
-        alert(res.response.data.message);
+        alert(res.response?.data?.message || 'Error when connecting to the database');
       });
   };
 
@@ -58,6 +105,7 @@ export default function MainPage() {
     return balance.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   };
   const balance = getBalance();
+  console.log(transactions);
   return (
     <>
       <MainPageStyle>
@@ -74,24 +122,20 @@ export default function MainPage() {
             <ul>
               {transactions.map((transaction, index) => {
                 return (
-                  <li key={index}>
-                    <TransactionStyle type={transaction.type}>
-                      <div className='transaction-info'>
-                        <span>{transaction.date}</span>
-                        {transaction.description}
-                      </div>
-                      <div className='transaction-value'>{`R$ ${parseFloat(
-                        transaction.value
-                      ).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}</div>
-                    </TransactionStyle>
-                  </li>
+                  <Transaction
+                    key={index}
+                    type={transaction.type}
+                    date={transaction.date}
+                    description={transaction.description}
+                    value={transaction.value}
+                    id={transaction._id}
+                    reloadPage={reloadPage}
+                    setReloadPage={setReloadPage}
+                  />
                 );
               })}
             </ul>
-            <BottomLineStyle positive={balance[0] !== '-'}>
-              <h2>SALDO</h2>
-              <h3>{`R$ ${balance}`}</h3>
-            </BottomLineStyle>
+            <BottomLine balance={balance} />
           </TransactionContainerStyle>
         )}
 

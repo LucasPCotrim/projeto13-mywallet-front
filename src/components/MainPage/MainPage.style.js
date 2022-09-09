@@ -52,7 +52,7 @@ export const EmptyTransactionContainerStyle = styled.div`
 
 export const TransactionContainerStyle = styled.div`
   width: 100%;
-  height: 500px;
+  height: min(700px, calc(100vh - 31px - 22px - 114px - 13px - 80px));
   background: #ffffff;
   border-radius: 5px;
   display: flex;
@@ -119,7 +119,21 @@ export const TransactionStyle = styled.div`
   }
 
   .transaction-value {
-    color: ${(props) => (props.type === 'income' ? '#03AC00' : '#C70000')};
+    margin-right: 7px;
+    span {
+      color: ${(props) => (props.type === 'income' ? '#03AC00' : '#C70000')};
+      margin-right: 11px;
+    }
+    button {
+      width: 16px;
+      height: 16px;
+      background-color: transparent;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+
+  button.delete-transaction {
   }
 `;
 
