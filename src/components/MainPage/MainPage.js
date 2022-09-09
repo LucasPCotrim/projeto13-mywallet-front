@@ -19,14 +19,17 @@ function Transaction({ type, date, description, value, id, reloadPage, setReload
 
   const executeDeleteTransaction = (token, transactionId) => {
     console.log(id);
-    const promise = deleteTransaction(token, transactionId);
-    promise
-      .then(() => {
-        setReloadPage(!reloadPage);
-      })
-      .catch((res) => {
-        alert(res.response?.data?.message || 'Error when connecting to the database');
-      });
+    const confirm = window.confirm('Deletar registro?');
+    if (confirm) {
+      const promise = deleteTransaction(token, transactionId);
+      promise
+        .then(() => {
+          setReloadPage(!reloadPage);
+        })
+        .catch((res) => {
+          alert(res.response?.data?.message || 'Error when connecting to the database');
+        });
+    }
   };
   return (
     <>
