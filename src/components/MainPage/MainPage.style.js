@@ -30,7 +30,7 @@ export const MainPageStyle = styled.div`
 
 export const EmptyTransactionContainerStyle = styled.div`
   width: 100%;
-  height: 500px;
+  height: min(700px, calc(100vh - 31px - 22px - 114px - 13px - 80px));
   background: #ffffff;
   border-radius: 5px;
   display: flex;
