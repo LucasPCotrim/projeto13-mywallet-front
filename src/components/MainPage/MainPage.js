@@ -28,7 +28,6 @@ export default function MainPage() {
     promise
       .then((res) => {
         console.log(res.data.message);
-        console.log(res.data.transactions);
         setTransactions([...res.data.transactions]);
       })
       .catch((res) => {

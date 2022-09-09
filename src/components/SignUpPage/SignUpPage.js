@@ -31,12 +31,13 @@ export default function SignUpPage() {
     promise
       .then((res) => {
         console.log(res.data.message);
+        clearForm();
         navigate('/');
       })
       .catch((res) => {
-        alert(res.response.data.message);
+        alert(res.response?.data?.message || 'Error when connecting to the database');
+        clearForm();
       });
-    clearForm();
   };
 
   const disableButton =

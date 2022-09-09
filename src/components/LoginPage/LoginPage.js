@@ -36,12 +36,13 @@ export default function LoginPage() {
           email: res.data.user.email,
           token: res.data.token,
         });
+        clearForm();
         navigate('/main');
       })
       .catch((res) => {
-        alert(res.response.data.message);
+        alert(res.response?.data?.message || 'Error when connecting to the database');
+        clearForm();
       });
-    clearForm();
   };
 
   const disableButton = form.email === '' || form.password === '';
