@@ -4,12 +4,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserContext from './contexts/UserContext';
 import LoginPage from './components/LoginPage/LoginPage';
 import SignUpPage from './components/SignUpPage/SignUpPage';
-import AddIncomePage from './components/AddIncomePage/AddIncomePage';
-import AddPaymentPage from './components/AddPaymentPage/AddPaymentPage';
+import TransactionPage from './components/TransactionPage/TransactionPage';
 import MainPage from './components/MainPage/MainPage';
 
 export default function App() {
-  const [user, setUser] = useState({ name: '', email: '', token: '' });
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    token: '',
+    page: 'LoginPage',
+    currentTransactionId: '',
+    currentTransactionValue: '',
+    currentTransactionDescription: '',
+  });
 
   return (
     <>
@@ -20,8 +27,7 @@ export default function App() {
             <Route path='/' element={<LoginPage />} />
             <Route path='/sign-up' element={<SignUpPage />} />
             <Route path='/main' element={<MainPage />} />
-            <Route path='/add-income' element={<AddIncomePage />} />
-            <Route path='/add-payment' element={<AddPaymentPage />} />
+            <Route path='/transaction/:pageType' element={<TransactionPage />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

@@ -1,9 +1,11 @@
 import { SignUpPageStyle, FormStyle } from './SignUpPage.style';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { signUp } from '../../APIs/myWalletService.js';
+import UserContext from '../../contexts/UserContext';
 
 export default function SignUpPage() {
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
@@ -29,9 +31,9 @@ export default function SignUpPage() {
     event.preventDefault();
     const promise = signUp(form);
     promise
-      .then((res) => {
-        console.log(res.data.message);
+      .then(() => {
         clearForm();
+        setUser({ ...user, page: 'LoginPage' });
         navigate('/');
       })
       .catch((res) => {

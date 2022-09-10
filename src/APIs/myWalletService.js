@@ -32,4 +32,17 @@ function deleteTransaction(token, transactionId) {
   return axios.delete(deleteTransactionAPI, { headers: { Authorization: `Bearer ${token}` } });
 }
 
-export { signUp, logIn, loadTransactions, createTransaction, logOut, deleteTransaction };
+function editTransaction(token, body, transactionId) {
+  const editTransactionAPI = `${BASE_URL}/transactions/${transactionId}`;
+  return axios.put(editTransactionAPI, body, { headers: { Authorization: `Bearer ${token}` } });
+}
+
+export {
+  signUp,
+  logIn,
+  loadTransactions,
+  createTransaction,
+  logOut,
+  deleteTransaction,
+  editTransaction,
+};

@@ -29,12 +29,12 @@ export default function LoginPage() {
     const promise = logIn(form);
     promise
       .then((res) => {
-        console.log(res.data.message);
         setUser({
           ...user,
           name: res.data.user.name,
           email: res.data.user.email,
           token: res.data.token,
+          page: 'MainPage',
         });
         clearForm();
         navigate('/main');

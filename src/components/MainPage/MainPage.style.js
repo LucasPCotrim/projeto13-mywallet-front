@@ -112,6 +112,7 @@ export const TransactionStyle = styled.div`
 
   .transaction-info {
     color: #000000;
+    cursor: pointer;
     span {
       color: #c6c6c6;
       margin-right: 10px;

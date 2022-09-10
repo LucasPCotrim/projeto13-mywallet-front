@@ -15,10 +15,10 @@ import UserContext from '../../contexts/UserContext';
 import { loadTransactions, logOut, deleteTransaction } from '../../APIs/myWalletService.js';
 
 function Transaction({ type, date, description, value, id, reloadPage, setReloadPage }) {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const executeDeleteTransaction = (token, transactionId) => {
-    console.log(id);
     const confirm = window.confirm('Deletar registro?');
     if (confirm) {
       const promise = deleteTransaction(token, transactionId);
@@ -31,11 +31,22 @@ function Transaction({ type, date, description, value, id, reloadPage, setReload
         });
     }
   };
+  const goToEditTransactionPage = () => {
+    setUser({
+      ...user,
+      page: `edit${uppercasePage}Page`,
+      currentTransactionId: id,
+      currentTransactionValue: value,
+      currentTransactionDescription: description,
+    });
+    navigate(`/transaction/edit${uppercasePage}`);
+  };
+  const uppercasePage = `${type[0].toUpperCase()}${type.slice(1)}`;
   return (
     <>
       <li>
         <TransactionStyle type={type}>
-          <div className='transaction-info'>
+          <div className='transaction-info' onClick={() => goToEditTransactionPage()}>
             <span>{date}</span>
             {description}
           </div>
@@ -65,13 +76,14 @@ function BottomLine({ balance }) {
 }
 
 export default function MainPage() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [transactions, setTransactions] = useState([]);
   const navigate = useNavigate();
   const [reloadPage, setReloadPage] = useState(false);
 
   useEffect(() => {
     if (user.token === '') {
+      setUser({ ...user, page: 'LoginPage' });
       navigate('/');
       return;
     }
@@ -81,15 +93,15 @@ export default function MainPage() {
         setTransactions([...res.data.transactions]);
       })
       .catch((res) => {
-        console.log(res);
+        alert(res.response?.data?.message || 'Error when connecting to the database');
       });
   }, [reloadPage]);
 
   const executeLogOut = () => {
     const promise = logOut(user.token);
     promise
-      .then((res) => {
-        console.log(res.data.message);
+      .then(() => {
+        setUser({ ...user, page: 'LoginPage' });
         navigate('/');
       })
       .catch((res) => {
@@ -108,7 +120,6 @@ export default function MainPage() {
     return balance.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
   };
   const balance = getBalance();
-  console.log(transactions);
   return (
     <>
       <MainPageStyle>
@@ -143,11 +154,19 @@ export default function MainPage() {
         )}
 
         <ButtonsContainerStyle>
-          <button onClick={() => navigate('/add-income')}>
+          <button
+            onClick={() => {
+              setUser({ ...user, page: 'AddIncomePage' });
+              navigate('/transaction/addIncome');
+            }}>
             <img src={plusIcon} alt='plusIcon' />
             <h2>Nova entrada</h2>
           </button>
-          <button onClick={() => navigate('/add-payment')}>
+          <button
+            onClick={() => {
+              setUser({ ...user, page: 'AddPaymentPage' });
+              navigate('/transaction/addPayment');
+            }}>
             <img src={minusIcon} alt='minusIcon' />
             <h2>Nova saída</h2>
           </button>
